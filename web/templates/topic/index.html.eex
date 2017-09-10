@@ -1,0 +1,18 @@
+<h2>Topics</h2>
+
+<ul class="collection">
+  <!-- even though this is not a call to map, elixir places an implicit return here where the value is the mapped list -->
+  <%= for topic <- @topics do %>
+    <li class="collection-item">
+        <%= topic.title %>
+    </li>
+  <%= end %>
+</ul>
+
+<div class="fixed-action-btn">
+  <!--  the elixir link tag creates an anchor tag -->
+  <%= link to: topic_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
+    <!--  'add' here is a converted to a '+' by material icons -->
+    <i class="material-icons">add</i>
+  <% end %>
+</div>
