@@ -17,6 +17,8 @@ defmodule Discuss.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/topics/new", TopicController, :new
+    post "/topics", TopicController, :create
   end
 
   # Other scopes may use custom stacks.
@@ -24,3 +26,6 @@ defmodule Discuss.Router do
   #   pipe_through :api
   # end
 end
+
+
+# running `mix phoenix.routes` in the cli will display this info above
