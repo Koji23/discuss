@@ -19,6 +19,14 @@ defmodule Discuss.Router do
     get "/", TopicController, :index
     get "/topics/new", TopicController, :new
     post "/topics", TopicController, :create
+    get "/topics/:id/edit", TopicController, :edit
+    put "/topics/:id", TopicController, :update
+    delete "topics/:id", TopicController, :delete
+
+    # alternativley you can use the resources helper which achieves the above ^ routes
+    # note: the resources helper assumes that your wildcard matcher will always be ":id"
+    
+    # resources "/topics", TopicController
   end
 
   # Other scopes may use custom stacks.

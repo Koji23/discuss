@@ -7,11 +7,11 @@ defmodule Discuss.Topic do
   end
 
   # two backslashes signify default arguments
-  # the changeset function returns a changeset struct
+  # by convention we call the function that creates a changeset, changeset
   # the struct represents either a record from the db or about to go into the db
   def changeset(struct, params \\ %{}) do
     struct
-      |> cast(params, [:title])
+      |> cast(params, [:title]) # cast creates a changeset
       |> validate_required([:title])
   end
 end
