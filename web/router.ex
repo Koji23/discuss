@@ -7,6 +7,7 @@ defmodule Discuss.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Discuss.Plugs.SetUser # function plugs are referenced as atoms, module plugs look like this
   end
 
   pipeline :api do
@@ -21,12 +22,18 @@ defmodule Discuss.Router do
     post "/topics", TopicController, :create
     get "/topics/:id/edit", TopicController, :edit
     put "/topics/:id", TopicController, :update
-    delete "topics/:id", TopicController, :delete
-
+    delete "/topics/:id", TopicController, :delete
     # alternativley you can use the resources helper which achieves the above ^ routes
     # note: the resources helper assumes that your wildcard matcher will always be ":id"
-    
+
     # resources "/topics", TopicController
+  end
+
+  scope "/auth", Discuss do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request # request here was defined by ueberauth, not us.
+    get "/:provider/callback", AuthController, :callback
   end
 
   # Other scopes may use custom stacks.
